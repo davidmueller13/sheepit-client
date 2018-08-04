@@ -297,7 +297,7 @@ public class Client {
 					int wait = ThreadLocalRandom.current().nextInt(10, 30 + 1); // max is exclusive
 					int time_sleep = 1000 * 60 * wait;
 					Date wakeup_time = new Date(new Date().getTime() + time_sleep);
-					this.gui.status(String.format("No job available. Sleeping for %d minutes (will wake up at %tR)", wait, wakeup_time));
+					this.gui.status(String.format("No job available. Sleeping for %d minutes (will wake up at %tR)", wait,
 							wakeup_time));
 					this.gui.displayStats(new Stats());
 					this.suspended = true;
