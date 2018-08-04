@@ -125,6 +125,9 @@ public class Worker {
 	
 	@Option(name = "-priority", usage = "Set render process priority (19 lowest to -19 highest [need root rights])", required = false)
 	private int priority = 19;
+
+	@Option(name = "-title", usage = "Custom title for the GUI Client", required = false)
+	private String title = "SheepIt Render Farm";
 	
 	public static void main(String[] args) {
 		new Worker().doMain(args);
@@ -350,7 +353,7 @@ public class Worker {
 					System.out.println("You should set a DISPLAY or use a text ui (with -ui " + GuiTextOneLine.type + " or -ui " + GuiText.type + ").");
 					System.exit(3);
 				}
-				gui = new GuiSwing(no_systray == false);
+				gui = new GuiSwing(no_systray == false, title);
 				break;
 		}
 		Client cli = new Client(gui, config, server);
