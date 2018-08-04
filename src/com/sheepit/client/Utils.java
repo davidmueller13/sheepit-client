@@ -20,12 +20,11 @@
 package com.sheepit.client;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.DigestInputStream;
@@ -36,8 +35,6 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.xml.bind.DatatypeConverter;
 
 import net.lingala.zip4j.model.UnzipParameters;
 import net.lingala.zip4j.core.ZipFile;
@@ -80,7 +77,11 @@ public class Utils {
 			byte[] buffer = new byte[8192];
 			while (dis.read(buffer) > 0)
 				; // process the entire file
-			String data = DatatypeConverter.printHexBinary(md.digest()).toLowerCase();
+			BigInteger bigInt = new BigInteger(1,md.digest());
+			String data = bigInt.toString(16).toLowerCase();
+			if((data.length() %2) != 0){
+				data = "0"+data;
+			}
 			dis.close();
 			is.close();
 			return data;
